@@ -1,0 +1,6 @@
+{
+  "app.header": "Automatische vertaling",
+  "app.info": "De vertalingen worden geautomatiseerd met Microsft Azure Translation Service",
+  "app.link": "Naar link gaan",
+  "app.text": "Welkom {user}"
+}

@@ -1,0 +1,50 @@
+{
+  "name": "react-i18n-dynamic",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.7.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-intl": "^5.12.3",
+    "react-scripts": "4.0.2",
+    "web-vitals": "^1.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "int:init": "cd scripts && npm install",
+    "int:extract": "formatjs extract \"src/**/*.{js,jsx,tx,tsx}\" \"--out-file\" \"lang/en.json\" \"--id-interpolation-pattern\" \"'[sha512:contenthash:base64:6]'\"",
+    "int:translate": "cd scripts && node translate.js"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.16",
+    "@babel/core": "^7.12.16",
+    "@formatjs/cli": "^3.1.0",
+    "@types/react-dom": "^17.0.1",
+    "babel-plugin-react-intl": "^8.2.25",
+    "cross-env": "^7.0.3"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "app.header": "Traduzione automatica",
+  "app.info": "Le traduzioni sono automatizzate con microsft Azure Translation Service",
+  "app.link": "Vai al link",
+  "app.text": "Ciao, benvenuto {user}"
+}
