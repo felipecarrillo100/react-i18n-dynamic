@@ -44,7 +44,29 @@ class App extends React.Component<any, any>{
               <select value = {this.context.locale} onChange={this.context.selectLanguage}>
                   {languagesOptions}
               </select>
+              <p>{this.context.rtl ? "rtl" : "ltr"}</p>
+              <p className="App-text" style={{direction: this.context.rtl ? "rtl" : "ltr"}}>
+                  <FormattedMessage
+                      id="app.sonnet"
+                      defaultMessage=" Weary with toil, I haste me to my bed,
+                  The dear repose for limbs with travel tired;
+                  But then begins a journey in my head,
+                  To work my mind, when body’s work’s expired:
+                  For then my thoughts (from far where I abide)
+                  Intend a zealous pilgrimage to thee,
+                  And keep my drooping eyelids open wide,
+                  Looking on darkness which the blind do see:
+                  Save that my soul’s imaginary sight
+                  Presents thy shadow to my sightless view,
+                  Which, like a jewel hung in ghastly night,
+                  Makes black night beauteous and her old face new.
+                  Lo, thus, by day my limbs, by night my mind,
+                  For thee, and for myself, no quiet find."
+                      description="Main Application sonnet"
+                  />
+                 </p>
           </header>
+
         </div>
     );
   }
