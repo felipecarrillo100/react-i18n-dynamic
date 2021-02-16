@@ -9,6 +9,7 @@ export const SupportedLanguages = [
     {name: "en", title: "English", hint: ""},
     {name: "ar", title: "Arabic", hint: ""},
     {name: "es", title: "Spanish", hint: ""},
+    {name: "zh", title: "Chinese", hint: ""},
 ]
 
 let local = "en";
@@ -18,10 +19,17 @@ let lang: any;
 function fetchLanguage(language: string) {
     return new Promise((resolve, reject) => {
         fetch('./translations/' + language + '.json')
-            .then(response => response.json())
-            .then(data => {
-                resolve(JSON.parse(JSON.stringify(data)))
-            });
+            .then(response => {
+                if (response.status === 200) {
+                    response.json().then(data => {
+                        resolve(JSON.parse(JSON.stringify(data)))
+                    }, (err) => {
+                        reject();
+                    });
+                } else {
+                    reject();
+                }
+            })
     });
 }
 
@@ -35,18 +43,23 @@ const Wrapper = (props: any) => {
         messages: messages as any,
     });
 
+    const changeLanguageOrDefaultToEnglish = (la: string) => {
+        fetchLanguage(la).then((content) => {
+            const isRtl = rtlDetect.isRtlLang(la);
+            setRtl(isRtl);
+            setMessages(content);
+            setLocale(la);
+        }, () => {
+            setRtl(false);
+            setLocale("en")
+            setMessages(undefined);
+        })
+    }
+
     const onComponentDidMounted = () => {
             let localAutodetect = navigator.language.substr(0, 2);
             // let localAutodetect = "fr";
-            fetchLanguage(localAutodetect).then((content) => {
-                const isRtl = rtlDetect.isRtlLang(localAutodetect);
-                setRtl(isRtl);
-                setMessages(content);
-                setLocale(localAutodetect);
-            }, () => {
-                setRtl(false);
-                setLocale("en")
-            })
+            changeLanguageOrDefaultToEnglish(localAutodetect);
     }
 
     useEffect(() => {
@@ -55,15 +68,7 @@ const Wrapper = (props: any) => {
 
     function selectLanguage(e: any) {
         const newLocale = e.target.value.substr(0, 2);
-        fetchLanguage(newLocale).then((content) => {
-            const isRtl = rtlDetect.isRtlLang(newLocale);
-            setRtl(isRtl);
-            setMessages(content);
-            setLocale(newLocale);
-        }, () => {
-            setRtl(false);
-            setLocale("en")
-        });
+        changeLanguageOrDefaultToEnglish(newLocale);
     }
 
     return (
